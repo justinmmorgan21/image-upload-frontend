@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import axios from 'axios';
 const ImageUploadForm = () => {
   const [image, setImage] = useState({});
   
@@ -10,13 +10,12 @@ const ImageUploadForm = () => {
   
   const handleSubmit = e => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('image', image);
+    const params = new FormData();
+    params.append('image', image);
 
-    fetch('http://localhost:3000/items', {
-      method: 'POST',
-      body: data,
-    });
+    axios.post("http://localhost:3000/items", params).then(response => {
+      console.log(response.data)
+    })
   };
   
   return (
